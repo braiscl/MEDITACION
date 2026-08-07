@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meditaciones — Marco Aurelio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+  :root{
+    --parchment: #eee6d4;
+    --parchment-2: #e3d7bd;
+    --ink: #2a2016;
+    --ink-soft: #4a3d2c;
+    --gold: #a9812f;
+    --gold-light: #c9a94c;
+    --maroon: #7c1f1f;
+    --sky-top: #d8c6a0;
+    --sky-mid: #b99a68;
+    --dusk: #5a3f2a;
+    --night: #24160e;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background: radial-gradient(ellipse at 50% 0%, #f7f2e6, #ded2b3 60%, #cdbd94);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    min-height:100vh;
+  }
+
+  body{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding: 5vh 16px 8vh;
+  }
+
+  .phone{
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    min-height: 780px;
+    border-radius: 40px;
+    overflow: hidden;
+    background:
+      linear-gradient(to bottom,
+        var(--sky-top) 0%,
+        var(--sky-mid) 30%,
+        var(--dusk) 62%,
+        var(--night) 100%);
+    box-shadow:
+      0 30px 60px -20px rgba(30,20,10,0.45),
+      0 0 0 1px rgba(169,129,47,0.25),
+      inset 0 0 80px rgba(0,0,0,0.25);
+  }
+
+  /* textura de mármol/ruido sutil */
+  .phone::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,0.10), transparent 40%),
+      radial-gradient(circle at 80% 8%, rgba(255,255,255,0.06), transparent 35%);
+    pointer-events:none;
+  }
+
+  /* siluetas de columnas al fondo */
+  .colonnade{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height: 46%;
+    display:flex;
+    justify-content:space-between;
+    padding: 0 6% 0 6%;
+    opacity: 0.5;
+    pointer-events:none;
+  }
+  .colonnade .col{
+    width: 8%;
+    background: linear-gradient(to bottom, rgba(20,12,6,0) 0%, rgba(20,12,6,0.55) 100%);
+    align-self:flex-end;
+    height: 100%;
+    border-top: 3px solid rgba(20,12,6,0.5);
+  }
+  .colonnade .col:nth-child(2){ height: 85%; }
+  .colonnade .col:nth-child(3){ height: 70%; }
+  .colonnade .col:nth-child(4){ height: 92%; }
+  .colonnade .col:nth-child(5){ height: 60%; }
+
+  .cypress{
+    position:absolute;
+    bottom: 0;
+    width: 26px;
+    height: 34%;
+    background: linear-gradient(to bottom, rgba(15,10,5,0.55), rgba(15,10,5,0.75));
+    clip-path: polygon(50% 0%, 80% 15%, 65% 15%, 90% 35%, 72% 35%, 95% 60%, 70% 60%, 78% 100%, 22% 100%, 30% 60%, 5% 60%, 28% 35%, 10% 35%, 35% 15%, 20% 15%);
+    opacity:0.55;
+    pointer-events:none;
+  }
+
+  header.topbar{
+    position: relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 22px 22px 0;
+    z-index: 3;
+  }
+  .icon-btn{
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(238,230,212,0.12);
+    border: 1px solid rgba(238,230,212,0.35);
+    color: var(--parchment);
+    cursor: pointer;
+  }
+  .icon-btn svg{ width:16px; height:16px; }
+
+  .content{
+    position: relative;
+    z-index: 2;
+    padding: 8px 30px 0;
+    text-align:center;
+  }
+
+  .emblem{
+    width: 92px;
+    height: 92px;
+    margin: 6px auto 6px;
+  }
+
+  h1.brand{
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    letter-spacing: 0.14em;
+    color: var(--parchment);
+    margin: 4px 0 0;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .eyebrow-label{
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: #d67a5a;
+    margin: 18px 0 6px;
+    text-transform: uppercase;
+  }
+
+  .divider{
+    width: 70px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+    margin: 0 auto 22px;
+  }
+
+  blockquote{
+    margin: 0 auto;
+    max-width: 320px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(21px, 5.4vw, 26px);
+    line-height: 1.48;
+    color: #f4ecd8;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+  blockquote::before{ content:"\201C"; color: var(--gold-light); }
+  blockquote::after{ content:"\201D"; color: var(--gold-light); }
+
+  .citation{
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: #d67a5a;
+  }
+
+  .actions{
+    position: relative;
+    z-index: 3;
+    display:flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 26px 20px 10px;
+  }
+  .action{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--parchment);
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .action .circle{
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: rgba(20,12,6,0.55);
+    border: 1px solid rgba(238,230,212,0.3);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .action .circle svg{ width:19px; height:19px; stroke: var(--parchment); fill:none; }
+  .action.active .circle{ background: rgba(124,31,31,0.55); border-color: rgba(214,122,90,0.6); }
+  .action.active .circle svg{ fill: #d67a5a; stroke: #d67a5a; }
+
+  .scrolldown{
+    text-align:center;
+    padding-bottom: 20px;
+    color: rgba(238,230,212,0.5);
+    font-size: 18px;
+  }
+
+  /* Biblioteca (drawer) */
+  .drawer-backdrop{
+    position: fixed; inset:0;
+    background: rgba(20,12,6,0.55);
+    backdrop-filter: blur(2px);
+    display:none;
+    z-index: 10;
+  }
+  .drawer-backdrop.open{ display:block; }
+  .drawer{
+    position: fixed;
+    left: 50%; bottom: 0;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%; max-width: 430px;
+    max-height: 72vh;
+    background: linear-gradient(to bottom, #efe7d4, #e1d3ae);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.35);
+    transition: transform 0.35s ease;
+    z-index: 11;
+    padding: 18px 20px 26px;
+    overflow-y: auto;
+  }
+  .drawer.open{ transform: translateX(-50%) translateY(0); }
+  .drawer h2{
+    font-family:'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    color: var(--maroon);
+    text-align:center;
+    margin: 4px 0 16px;
+  }
+  .drawer .close-btn{
+    position:absolute; top: 14px; right: 18px;
+    background:none; border:none; font-size:20px; color: var(--ink-soft); cursor:pointer;
+  }
+  .fav-item{
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(124,31,31,0.15);
+    text-align:left;
+    cursor:pointer;
+  }
+  .fav-item p{
+    margin:0 0 4px;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .fav-item span{
+    font-family:'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: var(--maroon);
+  }
+  .empty-lib{
+    text-align:center;
+    color: var(--ink-soft);
+    font-style: italic;
+    padding: 30px 10px;
+  }
+
+  .toast{
+    position: fixed;
+    left: 50%; bottom: 30px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="colonnade">
+    <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+  </div>
+  <div class="cypress" style="left:8%;"></div>
+  <div class="cypress" style="right:10%; height:28%;"></div>
+
+  <header class="topbar">
+    <div class="icon-btn" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </div>
+    <div class="icon-btn" id="btn-info" title="Acerca de">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+    </div>
+  </header>
+
+  <div class="content">
+    <svg class="emblem" viewBox="0 0 200 200" fill="none">
+      <!-- laureles -->
+      <g stroke="#c9a94c" stroke-width="2" fill="none" opacity="0.9">
+        <path d="M40 150 C 20 130, 15 100, 25 70 C 32 50, 45 35, 55 25" />
+        <g id="leftLeaves">
+          <ellipse cx="26" cy="68" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-30 26 68)"/>
+          <ellipse cx="22" cy="85" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-15 22 85)"/>
+          <ellipse cx="21" cy="103" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(0 21 103)"/>
+          <ellipse cx="25" cy="120" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(15 25 120)"/>
+          <ellipse cx="33" cy="136" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(30 33 136)"/>
+          <ellipse cx="45" cy="30" rx="6" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-45 45 30)"/>
+          <ellipse cx="34" cy="45" rx="6" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-45 34 45)"/>
+        </g>
+        <path d="M160 150 C 180 130, 185 100, 175 70 C 168 50, 155 35, 145 25" />
+        <g id="rightLeaves">
+          <ellipse cx="174" cy="68" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(30 174 68)"/>
+          <ellipse cx="178" cy="85" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(15 178 85)"/>
+          <ellipse cx="179" cy="103" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(0 179 103)"/>
+          <ellipse cx="175" cy="120" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-15 175 120)"/>
+          <ellipse cx="167" cy="136" rx="7" ry="3" fill="#c9a94c" stroke="none" transform="rotate(-30 167 136)"/>
+          <ellipse cx="155" cy="30" rx="6" ry="3" fill="#c9a94c" stroke="none" transform="rotate(45 155 30)"/>
+          <ellipse cx="166" cy="45" rx="6" ry="3" fill="#c9a94c" stroke="none" transform="rotate(45 166 45)"/>
+        </g>
+      </g>
+      <!-- casco -->
+      <g transform="translate(100 98)">
+        <path d="M-38 34 C -42 5 -30 -28 0 -34 C 30 -28 42 5 38 34 C 30 40 18 44 0 44 C -18 44 -30 40 -38 34 Z"
+              fill="#9c7a34" stroke="#6b5220" stroke-width="1.5"/>
+        <path d="M-38 20 C -46 20 -50 30 -46 40 L -34 40 C -37 33 -38 27 -38 20 Z" fill="#8a6a2c" stroke="#6b5220" stroke-width="1.2"/>
+        <path d="M38 20 C 46 20 50 30 46 40 L 34 40 C 37 33 38 27 38 20 Z" fill="#8a6a2c" stroke="#6b5220" stroke-width="1.2"/>
+        <path d="M-10 10 C -10 24 -10 34 -14 42 L -4 42 C -2 34 -2 22 -3 10 Z" fill="#5c4318"/>
+        <path d="M10 10 C 10 24 10 34 14 42 L 4 42 C 2 34 2 22 3 10 Z" fill="#5c4318"/>
+        <path d="M-48 -18 C -30 -46 30 -46 48 -18 C 40 -22 20 -25 0 -25 C -20 -25 -40 -22 -48 -18 Z" fill="#b8944a" stroke="#6b5220" stroke-width="1.2"/>
+        <path d="M-6 -30 C -10 -70 -6 -96 0 -108 C 6 -96 10 -70 6 -30 Z" fill="#7c1f1f"/>
+        <path d="M-6 -30 C -14 -66 -10 -90 -2 -104 C -6 -88 -8 -60 -3 -30 Z" fill="#9c2b2b"/>
+      </g>
+    </svg>
+
+    <h1 class="brand">MEDITACIONES</h1>
+    <div class="eyebrow-label" id="fecha-label">Meditación del día</div>
+    <div class="divider"></div>
+
+    <blockquote id="quote">Cargando…</blockquote>
+    <div class="citation" id="cita"></div>
+  </div>
+
+  <div class="actions">
+    <button class="action" id="btn-fav">
+      <span class="circle"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2 4.5 5.5 3.8 8 3.3 10 4.6 12 7c2-2.4 4-3.7 6.5-3.2C22 4.5 23.5 8 22 11.7 19.5 16.4 12 21 12 21z"/></svg></span>
+      Favorito
+    </button>
+    <button class="action" id="btn-share">
+      <span class="circle"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 3v12M7 8l5-5 5 5M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3"/></svg></span>
+      Compartir
+    </button>
+    <button class="action" id="btn-lib">
+      <span class="circle"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 3v5h5"/></svg></span>
+      Biblioteca
+    </button>
+  </div>
+
+  <div class="scrolldown">⌄</div>
+</div>
+
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<div class="drawer" id="drawer">
+  <button class="close-btn" id="drawer-close">✕</button>
+  <h2>Tu biblioteca</h2>
+  <div id="drawer-content"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let meditaciones = [];
+  let elegidaIdx = 0;
+  let elegida = null;
+
+  const FAV_KEY = 'meditaciones-favoritos';
+  const getFavs = () => JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+  const setFavs = (arr) => localStorage.setItem(FAV_KEY, JSON.stringify(arr));
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=> t.classList.remove('show'), 1800);
+  }
+
+  function renderQuote(item){
+    document.getElementById('quote').textContent = item.texto;
+    document.getElementById('cita').textContent = '— Marco Aurelio, ' + item.cita;
+    updateFavButton();
+  }
+
+  function updateFavButton(){
+    const favs = getFavs();
+    const btn = document.getElementById('btn-fav');
+    if (favs.includes(elegidaIdx)) btn.classList.add('active');
+    else btn.classList.remove('active');
+  }
+
+  async function init(){
+    try{
+      const res = await fetch('meditaciones.json');
+      meditaciones = await res.json();
+    }catch(e){
+      document.getElementById('quote').textContent = 'No se pudo cargar meditaciones.json';
+      return;
+    }
+    const ahora = new Date();
+    const inicioAno = new Date(ahora.getFullYear(), 0, 0);
+    const diaDelAno = Math.floor((ahora - inicioAno) / 86400000);
+    elegidaIdx = diaDelAno % meditaciones.length;
+    elegida = meditaciones[elegidaIdx];
+    renderQuote(elegida);
+  }
+
+  document.getElementById('btn-fav').addEventListener('click', () => {
+    let favs = getFavs();
+    if (favs.includes(elegidaIdx)){
+      favs = favs.filter(i => i !== elegidaIdx);
+      showToast('Eliminado de favoritos');
+    } else {
+      favs.push(elegidaIdx);
+      showToast('Añadido a favoritos');
+    }
+    setFavs(favs);
+    updateFavButton();
+  });
+
+  document.getElementById('btn-share').addEventListener('click', async () => {
+    const text = `"${elegida.texto}" — Marco Aurelio, ${elegida.cita}`;
+    if (navigator.share){
+      try{ await navigator.share({ text }); } catch(e){}
+    } else {
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast('Copiado al portapapeles');
+      }catch(e){
+        showToast('No se pudo copiar');
+      }
+    }
+  });
+
+  const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+
+  function openLibrary(){
+    const favs = getFavs();
+    const content = document.getElementById('drawer-content');
+    if (favs.length === 0){
+      content.innerHTML = '<p class="empty-lib">Aún no has guardado ninguna meditación.<br>Toca el corazón para añadir la de hoy.</p>';
+    } else {
+      content.innerHTML = favs.map(idx => {
+        const m = meditaciones[idx];
+        if (!m) return '';
+        return `<div class="fav-item" data-idx="${idx}"><p>“${m.texto}”</p><span>— ${m.cita}</span></div>`;
+      }).join('');
+      content.querySelectorAll('.fav-item').forEach(el => {
+        el.addEventListener('click', () => {
+          elegidaIdx = parseInt(el.dataset.idx, 10);
+          elegida = meditaciones[elegidaIdx];
+          renderQuote(elegida);
+          closeLibrary();
+        });
+      });
+    }
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+  }
+  function closeLibrary(){
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+  }
+
+  document.getElementById('btn-lib').addEventListener('click', openLibrary);
+  document.getElementById('drawer-close').addEventListener('click', closeLibrary);
+  backdrop.addEventListener('click', closeLibrary);
+
+  document.getElementById('btn-info').addEventListener('click', () => {
+    showToast('Una reflexión distinta cada día');
+  });
+
+  init();
+</script>
+
+</body>
+</html>
